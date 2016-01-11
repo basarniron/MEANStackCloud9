@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>My demo app</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="controllers/mainController.js"></script>
+        <script type="text/javascript" src="services/bookService.js"></script>
+    </head>
+    <body ng-app="bookApp" ng-controller="mainController">
+        <div class="jumbotron text-center container">
+            <div class="row">
+                <div class="col-xs-12">
+                     <h2>Welcome to the demo app</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                     <button ng-click="showCreateForm=true" class="btn btn-default">Add new book</button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12" id="createForm" ng-show="showCreateForm">
+                     <form role="form" class="form-inline">
+                         <div class="form-group">
+                             <label for="bookName">Book Name : </label>
+                             <input type="text" name="bookName" ng-model="newBook.name" class="form-control input-sm" />
+                         </div>
+                         
+                         <div class="form-group">
+                             <label for="bookIsbn">Book ISBN : </label>
+                             <input type="text" name="bookIsbn" ng-model="newBook.isbn" class="form-control input-sm" />
+                         </div>
+                         
+                         <div class="form-group">
+                             <label for="bookAuthor">Book Author : </label>
+                             <input type="text" name="bookAuthor" ng-model="newBook.author" class="form-control input-sm" />
+                         </div>
+                         
+                         <div class="form-group">
+                             <button type="submit" value="Create" ng-click="createBook(newBook)" class="btn btn-default" />
+                         </div>
+                         
+                     </form>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12" id="detailsForm" ng-show="showDetailsForm">
+                     <form role="form" class="form-inline">
+                         <div class="form-group">
+                             <label for="bookName">Book Name : </label>
+                             <input type="text" name="bookName" ng-model="activeBookItem.name" class="form-control input-sm" />
+                         </div>
+                         
+                         <div class="form-group">
+                             <label for="bookIsbn">Book ISBN : </label>
+                             <input type="text" name="bookIsbn" ng-model="activeBookItem.isbn" class="form-control input-sm" />
+                         </div>
+                         
+                         <div class="form-group">
+                             <label for="bookAuthor">Book Author : </label>
+                             <input type="text" name="bookAuthor" ng-model="activeBookItem.author" class="form-control input-sm" />
+                         </div>
+                         
+                         <div class="form-group">
+                             <button ng-click="updateBook(activeBookItem)" class="btn btn-default">Update</button>
+                             <button ng-click="deleteBook(activeBookItem)" class="btn btn-default">Delete</button>
+                         </div>
+                         
+                         
+                     </form>
+                </div>
+            </div>
+            
+            
+            <div id="book-list" class="row">
+                <div class="col-md-12">
+                    <div ng-repeat="book in books">
+                        <p ng-click="showDetails(book)">{{book.name + ' - ' + book._id}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
